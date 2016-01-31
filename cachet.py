@@ -281,7 +281,7 @@ class Cachet(object):
         kwargs['value'] = value
         return self.__postRequest('/metrics/%s/points' % id, kwargs)
 
-    def deleteMetricsPointsByID(self, id):
+    def deleteMetricsPointsByID(self, id, point_id):
         '''Delete a metric point.
 
         :param id: Metric ID
@@ -290,7 +290,7 @@ class Cachet(object):
         :rtype: requests.Response
         '''
 
-        return self.__delRequest('/metrics/%s/points' % id)
+        return self.__delRequest('/metrics/%s/points/%s' % (id, point_id))
 
     def getSubscribers(self):
         '''Returns all subscribers.
