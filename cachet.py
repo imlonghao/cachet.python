@@ -9,7 +9,7 @@ class Cachet(object):
         self.apiToken = apiToken
 
     def __getRequest(self, path):
-        return requests.get(self.url + path, headers={'X-Cachet-Token': self.apiToken})
+        return requests.get(self.url + path)
 
     def __postRequest(self, path, data):
         return requests.post(self.url + path, data, headers={'X-Cachet-Token': self.apiToken})
