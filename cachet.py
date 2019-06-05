@@ -45,16 +45,17 @@ class Cachet(object):
         :return: :class:`Response <Response>` object
         :rtype: requests.Response
         '''
-        params={}
-        params['id']=id
-        params['name']=name
-        params['status']=status
-        params['group_id']=group_id
-        params['enabled']=enabled
-        params['sort']=sort
-        params['order']=order
-        params['per_page']=per_page
-        
+
+        params = {}
+        params['id'] = id
+        params['name'] = name
+        params['status'] = status
+        params['group_id'] = group_id
+        params['enabled'] = enabled
+        params['sort'] = sort
+        params['order'] = order
+        params['per_page'] = per_page
+
         return self.__getRequest('/components', params=params)
 
     def getComponentsByID(self, id):
@@ -126,14 +127,15 @@ class Cachet(object):
         :return: :class:`Response <Response>` object
         :rtype: requests.Response
         '''
-        params={}
-        params['id']=id
-        params['name']=name
-        params['collapsed']=collapsed
-        params['visible']=visible
-        params['sort']=sort
-        params['order']=order
-        params['per_page']=per_page
+
+        params = {}
+        params['id'] = id
+        params['name'] = name
+        params['collapsed'] = collapsed
+        params['visible'] = visible
+        params['sort'] = sort
+        params['order'] = order
+        params['per_page'] = per_page
 
         return self.__getRequest('/components/groups', params=params)
 
@@ -199,19 +201,19 @@ class Cachet(object):
         :return: :class:`Response <Response>` object
         :rtype: requests.Response
         '''
-        
-        params={}
-        params['id']=id
-        params['component_id']=component_id
-        params['name']=name
-        params['status']=status
-        params['visible']=visible
-        params['sort']=sort
-        params['order']=order
-        params['per_page']=per_page
-        
-        return self.__getRequest( '/incidents', params=params)
-    
+
+        params = {}
+        params['id'] = id
+        params['component_id'] = component_id
+        params['name'] = name
+        params['status'] = status
+        params['visible'] = visible
+        params['sort'] = sort
+        params['order'] = order
+        params['per_page'] = per_page
+
+        return self.__getRequest('/incidents', params=params)
+
     def getIncidentsByID(self, id):
         '''Returns a single incident.
 
