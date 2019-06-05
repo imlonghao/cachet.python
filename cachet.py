@@ -8,8 +8,8 @@ class Cachet(object):
         self.url = url
         self.apiToken = apiToken
 
-    def __getRequest(self, path):
-        return requests.get(self.url + path)
+    def __getRequest(self, path, params=None):
+        return requests.get(self.url + path, params=params, headers={'X-Cachet-Token': self.apiToken})
 
     def __postRequest(self, path, data):
         return requests.post(self.url + path, data, headers={'X-Cachet-Token': self.apiToken})
@@ -37,6 +37,25 @@ class Cachet(object):
         '''
 
         return self.__getRequest('/components')
+
+    def searchComponents(self, id=None, name=None, status=None, group_id=None, enabled=None, sort=None, order='desc', per_page=None):
+        '''
+        Search for Components using the advance api usage.
+
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+        params={}
+        params['id']=id
+        params['name']=name
+        params['status']=status
+        params['group_id']=group_id
+        params['enabled']=enabled
+        params['sort']=sort
+        params['order']=order
+        params['per_page']=per_page
+        
+        return self.__getRequest('/components', params=params)
 
     def getComponentsByID(self, id):
         '''Return a single component.
@@ -100,6 +119,24 @@ class Cachet(object):
 
         return self.__getRequest('/components/groups')
 
+    def searchComponentsGroups(self, id=None, name=None, collapsed=None, visible=None, sort=None, order='desc', per_page=None):
+        '''
+        Search for ComponentsGroups using the advance api usage.
+
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+        params={}
+        params['id']=id
+        params['name']=name
+        params['collapsed']=collapsed
+        params['visible']=visible
+        params['sort']=sort
+        params['order']=order
+        params['per_page']=per_page
+
+        return self.__getRequest('/components/groups', params=params)
+
     def getComponentsGroupsByID(self, id):
         '''
 
@@ -155,6 +192,26 @@ class Cachet(object):
 
         return self.__getRequest('/incidents')
 
+    def searchIncidents(self, id=None, component_id=None, name=None, status=None, visible=None, sort=None, order='desc', per_page=None):
+        '''
+        Search for Incidents using the advance api usage.
+
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+        
+        params={}
+        params['id']=id
+        params['component_id']=component_id
+        params['name']=name
+        params['status']=status
+        params['visible']=visible
+        params['sort']=sort
+        params['order']=order
+        params['per_page']=per_page
+        
+        return self.__getRequest( '/incidents', params=params)
+    
     def getIncidentsByID(self, id):
         '''Returns a single incident.
 
