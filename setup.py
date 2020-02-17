@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
         name='cachet',
-        version='0.1.1',
+        version='0.1.2',
         url='https://github.com/imlonghao/cachet.python',
         license='MIT',
         author='imlonghao',
