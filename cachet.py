@@ -29,14 +29,14 @@ class Cachet(object):
 
         return self.__getRequest('/ping')
 
-    def getComponents(self):
+    def getComponents(self, params=None):
         '''Return all components that have been created.
 
         :return: :class:`Response <Response>` object
         :rtype: requests.Response
         '''
 
-        return self.__getRequest('/components')
+        return self.__getRequest('/components', params)
 
     def searchComponents(self, id=None, name=None, status=None, group_id=None, enabled=None, sort=None, order='desc', per_page=None):
         '''
@@ -269,6 +269,67 @@ class Cachet(object):
         '''
 
         return self.__delRequest('/incidents/%s' % id)
+
+    def getIncidentUpdates(self, id):
+        '''Returns all Incident Updates for an Incident.
+
+        :param id: Incident ID
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+
+        return self.__getRequest('/incidents/%s/updates' % id)
+
+    def getIncidentUpdateByID(self, id, update_id):
+        '''Returns an incident update.
+
+        :param id: Incident ID
+        :param update_id: Update ID
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+
+        return self.__getRequest('/incidents/%s/updates/%s' % (id, update_id))
+
+    def postIncidentUpdate(self, id, status, message, **kwargs):
+        '''Create an incident update.
+
+        :param id: Incident ID
+        :param status: Incident status level.
+        :param message: Incident update text.
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+
+        kwargs['status'] = status
+        kwargs['message'] = message
+        return self.__postRequest('/incidents/%s/updates' % id, kwargs)
+
+    def putIncidentUpdateByID(self, id, update_id, status, message, **kwargs):
+        '''Update an incident update.
+
+        :param id: Incident ID
+        :param update_id: Update ID
+        :param status: Incident status level.
+        :param message: Incident update text.
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+
+        kwargs['status'] = status
+        kwargs['message'] = message
+        return self.__putRequest('/incidents/%s/updates/%s' % (id, update_id), kwargs)
+
+    def deleteIncidentUpdateByID(self, id, update_id):
+        '''Delete an incident update.
+
+        :param id: Incident ID
+        :param update_id: Update ID
+        :return: :class:`Response <Response>` object
+        :rtype: requests.Response
+        '''
+
+        return self.__delRequest('/incidents/%s/updates/%s' % (id, update_id))
 
     def getMetrics(self):
         '''Returns all metrics that have been setup.
